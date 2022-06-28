@@ -140,6 +140,16 @@ export default class LinkedList<Type> {
     }
   }
 
+  getElementsAsArray(): NodeT<Type>[] {
+    const result: NodeT<Type>[] = [];
+
+    for (let i = 0; i < this.length; i++) {
+      const element: NodeT<Type> | undefined = this.getElement(i);
+      if(element !== undefined) result.push(element);
+    }
+    return result;
+  }
+
   clone(): LinkedList<Type>{
     const copy: LinkedList<Type> = new LinkedList<Type>();
     let temp: NodeT<Type> = this.head;
@@ -154,14 +164,28 @@ export default class LinkedList<Type> {
     return copy;
   }
 
-  getElementsAsArray(): NodeT<Type>[] {
-    const result: NodeT<Type>[] = [];
-
-    for (let i = 0; i < this.length; i++) {
-      const element: NodeT<Type> | undefined = this.getElement(i);
-      if(element !== undefined) result.push(element);
+  reverse(): void{
+    const prevHead: NodeT<Type> = this.head;
+    let current: NodeT<Type> = null;
+    let prev: NodeT<Type> = null;
+    let next: NodeT<Type> = this.head !== null ? this.head.next : null;
+    while(current !== this.tail){
+      if(current === null) {
+        current = this.head;
+      } else if (next !== null){
+        current.prev = next;
+        prev = current;
+        current = next;
+        next = current.next;
+        current.next = prev;
+      }
     }
-    return result;
+    this.head = this.tail;
+    this.tail = prevHead;
+    if(this.tail !== null && this.head !== null) {
+      this.head.prev = null;
+      this.tail.next = null;
+    }
   }
 }
 
@@ -171,18 +195,25 @@ list.append('1');
 list.append('3');
 list.append('2');
 list.append('4');
-list.insert('inserted', 2);
-list.deleteNode(2);
-list.append('5');
-list.append('5');
-for (let i = 0; i < list.length; i++) {
-  console.dir(list.getElement(i), { depth: 10 });
-}
-list.deleteAll('5');
-for (let i = 0; i < list.length; i++) {
-  console.dir(list.getElement(i), { depth: 10 });
-}
+// list.insert('inserted', 2);
+// list.deleteNode(2);
+// list.append('5');
+// list.append('5');
+// for (let i = 0; i < list.length; i++) {
+//   console.dir(list.getElement(i), { depth: 10 });
+// }
+// list.deleteAll('5');
+// for (let i = 0; i < list.length; i++) {
+//   console.dir(list.getElement(i), { depth: 10 });
+// }
+//
+// const copiedList = list.clone();
+//
+// console.dir(list.getElementsAsArray(), { depth: 10 });
+// console.dir(copiedList.getElementsAsArray(), { depth: 10 });
 
+list.reverse();
+console.dir(list.getElementsAsArray(), { depth: 10 });
 
 
 
