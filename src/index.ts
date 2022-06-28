@@ -14,6 +14,12 @@ export default class LinkedList<Type> {
     this.tail = null;
   }
 
+  checkIndex(index: number, max: number){
+    if(index < 0 || index > max){
+      throw new Error('Incorrect index specified');
+    }
+  }
+
   get _head(){
     return this.head ? this.head.value : null;
   }
