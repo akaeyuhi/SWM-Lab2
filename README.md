@@ -1,14 +1,17 @@
 # SWM-Lab2
 Software development methodology(IV term) Lab2
 
-## Double linked list class and tests
+## Doubly linked list class and tests
 
-Simple double LinkedList class implemented in Typescript with length, append, insert, deleteNode, deleteAll, getElement, clone and reverse methods. As for the testing framework jest is used. 
+Simple doubly LinkedList class implemented in Typescript with length, append, insert, deleteNode, deleteAll, getElement, clone and reverse methods. As for the testing framework jest is used. 
 
 ## Variant of Lab#2
 ```
-403 % 2 = 1 --> Double Linked List
+403 % 2 = 1 --> Doubly Linked List
 ```
+### Description
+Doubly linked list is a linked data structure that consists of a set of sequentially linked records called nodes. Each node contains three fields: two link fields (references to the previous and to the next node in the sequence of nodes) and one data field. The beginning and ending nodes' previous and next links, respectively, point to some kind of terminator, typically a sentinel node or null, to facilitate traversal of the list.
+
 
 ### Initialization
 
