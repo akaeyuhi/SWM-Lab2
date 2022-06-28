@@ -16,7 +16,7 @@ describe('Linked list tests', () => {
       expect(list.length).toEqual(4);
     });
 
-    it('should return starting length + 1 (4)', () => {
+    it('should return starting length + 1 (5)', () => {
       list.append('another node');
       expect(list.length).toEqual(5);
     });
