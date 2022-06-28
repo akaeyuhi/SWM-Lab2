@@ -33,7 +33,19 @@ describe('Linked list tests', () => {
     })
   });
 
-  describe('.append() testing', () => {
+  describe('.getElement() method testing', () => {
+
+    it('should return element at passed index', () => {
+      expect(list.getElement(0)).toEqual('1');
+    });
+
+    it('should throw an error', () => {
+      const incorrectIndex: number = list.length;
+      expect(() => list.getElement(incorrectIndex)).toThrow(new Error('Incorrect index specified'));
+    });
+  })
+
+  describe('.append() method testing', () => {
     it('should increase number of elements', () => {
       const prevLength: number = list.length;
 
