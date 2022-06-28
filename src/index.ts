@@ -1,13 +1,15 @@
 interface Node<Type> {
   value: Type,
-  next: Node<Type>,
-  prev: Node<Type>
+  next: NodeT<Type>,
+  prev: NodeT<Type>
 }
+
+type NodeT<Type> = Node<Type> | null
 
 
 export default class LinkedList<Type> {
-  private head: Node<Type>;
-  private tail: Node<Type>;
+  private head: NodeT<Type>;
+  private tail: NodeT<Type>;
 
   constructor() {
     this.head = null;
@@ -15,47 +17,41 @@ export default class LinkedList<Type> {
   }
 
   get length(): number {
-    let temp: Node<Type> = this.head;
+    let temp: NodeT<Type> = this.head;
     let count = 0;
 
-    while (true) {
-      if (temp === null || temp === this.tail) {
-        count += (temp === null ? 0 : 1);
-        break;
-      }
-
+    while (temp !== null && temp !== this.tail) {
       count++;
-      temp = temp.next;
+      temp = temp?.next;
     }
+    count += (temp === null ? 0 : 1);
     return count;
   }
 
-  get _head() {
+  get _head(): Type | null {
     return this.head ? this.head.value : null;
   }
 
-  get _tail() {
+  get _tail(): Type | null {
     return this.tail ? this.tail.value : null;
   }
 
-  checkIndex(index: number, max: number) {
+  checkIndex(index: number, max: number): void {
     if (index < 0 || index > max) {
       throw new Error('Incorrect index specified');
     }
   }
 
-  append(data: Type) {
+  append(data: Type): void {
     const nodeToAppend: Node<Type> = {
       value: data,
       next: null,
       prev: this.tail,
     };
 
-    console.log(this.length);
-
     if (this.length) {
       this.tail = nodeToAppend;
-      if (this.length > 1) {
+      if (this.length > 1 && this.tail.prev !== null) {
         this.tail.prev.next = nodeToAppend;
       } else {
         this.tail.prev = this.head;
@@ -64,19 +60,19 @@ export default class LinkedList<Type> {
       this.head = nodeToAppend;
     }
 
-    if (this.length === 1) {
+    if (this.length === 1 && this.head !== null) {
       this.head.next = this.tail;
     }
   }
 
-  getElement(index: number): Node<Type> {
+  getElement(index: number): NodeT<Type> | undefined {
     this.checkIndex(index, this.length - 1);
 
-    let temp: Node<Type> = this.head;
+    let temp: NodeT<Type> | undefined = this.head;
     for (let i = 0; i < this.length; i++) {
       if (i === index) return temp;
 
-      temp = temp.next;
+      temp = temp?.next;
     }
   }
 }
