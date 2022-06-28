@@ -20,6 +20,22 @@ export default class LinkedList<Type> {
     }
   }
 
+  get length(): number{
+    let temp: Node<Type> = this.head;
+    let count: number = 0;
+
+    while(true){
+      if(temp === null || temp === this.tail){
+        count += (temp === null ? 0 : 1);
+        break;
+      }
+
+      count++;
+      temp = temp.next;
+    }
+    return count;
+  }
+
   get _head(){
     return this.head ? this.head.value : null;
   }
