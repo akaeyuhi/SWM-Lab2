@@ -29,28 +29,31 @@ describe('Linked list tests', () => {
 
   describe('.checkIndex() method testing', () => {
     it('should trow an error', () => {
-      expect(() => list.checkIndex(9, 8)).toThrow(new Error('Incorrect index specified'));
-    })
+      expect(() => list.checkIndex(9, 8)).toThrow(
+        new Error('Incorrect index specified')
+      );
+    });
   });
 
   describe('.getElement() method testing', () => {
-
     it('should return element at passed index', () => {
       expect(list.getElement(0)!.value).toEqual('1');
     });
 
     it('should throw an error', () => {
       const incorrectIndex: number = list.length;
-      expect(() => list.getElement(incorrectIndex)).toThrow(new Error('Incorrect index specified'));
+      expect(() => list.getElement(incorrectIndex)).toThrow(
+        new Error('Incorrect index specified')
+      );
     });
-  })
+  });
 
   describe('.append() method testing', () => {
     it('should increase number of elements', () => {
       const prevLength: number = list.length;
 
       list.append('5');
-      expect(list.length).toBeGreaterThan(prevLength)
+      expect(list.length).toBeGreaterThan(prevLength);
     });
 
     it('should change "tail" property', () => {
@@ -90,8 +93,9 @@ describe('Linked list tests', () => {
     });
 
     it('should throw an error', () => {
-      expect(() => list.insert('inserted', list.length + 1))
-        .toThrow(new Error('Incorrect index specified'));
+      expect(() => list.insert('inserted', list.length + 1)).toThrow(
+        new Error('Incorrect index specified')
+      );
     });
   });
 
@@ -131,11 +135,13 @@ describe('Linked list tests', () => {
       list.deleteNode(0);
       list.deleteNode(2);
       expect(list._head).toEqual('2');
-      expect(list._tail).toEqual('3')
+      expect(list._tail).toEqual('3');
     });
 
     it('should throw an error', () => {
-      expect(() => list.deleteNode(-1)).toThrow(new Error('Incorrect index specified'));
+      expect(() => list.deleteNode(-1)).toThrow(
+        new Error('Incorrect index specified')
+      );
     });
   });
 
@@ -166,7 +172,6 @@ describe('Linked list tests', () => {
       expect(copy.length).toEqual(list.length);
     });
   });
-
 
   describe('.reverse() method testing', () => {
     it('should reverse the order of nodes', () => {

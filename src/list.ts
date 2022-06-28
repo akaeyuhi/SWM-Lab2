@@ -98,8 +98,8 @@ export default class LinkedList<Type> {
       nodeToInsert = {
         value: data,
         next: this.head,
-        prev: null
-      }
+        prev: null,
+      };
       this.head = nodeToInsert;
     }
   }
@@ -112,9 +112,8 @@ export default class LinkedList<Type> {
 
     for (let i = 0; i < this.length; i++) {
       if (i === index && temp !== null) {
-
         if (prev !== null) prev.next = temp.next;
-        if (temp.next !== null ) temp.next.prev = prev;
+        if (temp.next !== null) temp.next.prev = prev;
 
         if (temp === this.head && temp.next !== null) {
           this.head = temp.next;
