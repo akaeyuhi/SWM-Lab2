@@ -74,7 +74,7 @@ describe('Linked list tests', () => {
       const newValue = 'inserted';
 
       list.insert(newValue, index);
-      expect(list.getElement(index)).toEqual(newValue);
+      expect(list.getElement(index)!.value).toEqual(newValue);
     });
 
     it('should change head/tail properties properly', () => {
@@ -95,7 +95,30 @@ describe('Linked list tests', () => {
     });
   });
 
-  describe('.deleteNode() testing', () => {
+  describe('.findFirst() method testing', () => {
+    it('should return index of the first element with passed value', () => {
+      list.insert('inserted', 2);
+
+      expect(list.findFirst('inserted')).toEqual(2);
+    });
+
+    it('should return -1, if no elements were found', () => {
+      expect(list.findFirst('test element')).toEqual(-1);
+    });
+  });
+
+  describe('.findLast() method testing', () => {
+    it('should return index of the last element with passed value', () => {
+      list.insert('inserted2', 3);
+      expect(list.findLast('inserted2')).toEqual(3);
+    });
+
+    it('should return -1, if no elements were found', () => {
+      expect(list.findLast('test element')).toEqual(-1);
+    });
+  });
+
+  describe('.deleteNode() method testing', () => {
     it('should delete node by passed index', () => {
       const index = 1;
       const value: string = list.getElement(index)!.value;
@@ -106,9 +129,9 @@ describe('Linked list tests', () => {
 
     it('should change head/tail properties properly', () => {
       list.deleteNode(0);
-      list.deleteNode(1);
-      expect(list._head).toEqual('3');
-      expect(list._tail).toEqual('4')
+      list.deleteNode(2);
+      expect(list._head).toEqual('2');
+      expect(list._tail).toEqual('3')
     });
 
     it('should throw an error', () => {
@@ -116,7 +139,7 @@ describe('Linked list tests', () => {
     });
   });
 
-  describe('.deleteAll() testing', () => {
+  describe('.deleteAll() method testing', () => {
     it('should delete all nodes with passed value', () => {
       list.append('2');
 
@@ -133,7 +156,7 @@ describe('Linked list tests', () => {
     });
   });
 
-  describe('.clone() testing', () => {
+  describe('.clone() method testing', () => {
     it('should copy all elements', () => {
       const copy: LinkedList<string> = list.clone();
 
@@ -141,6 +164,37 @@ describe('Linked list tests', () => {
       expect(copy.getElement(1)!.value).toEqual(list.getElement(1)!.value);
       expect(copy.getElement(2)!.value).toEqual(list.getElement(2)!.value);
       expect(copy.length).toEqual(list.length);
+    });
+  });
+
+
+  describe('.reverse() method testing', () => {
+    it('should reverse the order of nodes', () => {
+      list.reverse();
+
+      expect(list.getElement(0)!.value).toEqual('4');
+      expect(list.getElement(1)!.value).toEqual('3');
+      expect(list.getElement(2)!.value).toEqual('2');
+      expect(list.getElement(3)!.value).toEqual('1');
+    });
+
+    it('should change head/tail properties', () => {
+      const prevHead: string = list.getElement(0)!.value;
+      const prevTail: string = list.getElement(list.length - 1)!.value;
+
+      list.reverse();
+      expect(list._head).toEqual(prevTail);
+      expect(list._tail).toEqual(prevHead);
+    });
+  });
+
+  describe('.clear() method testing', () => {
+    it('should delete all data about the list', () => {
+      list.clear();
+
+      expect(list.length).toEqual(0);
+      expect(list._head).toEqual(null);
+      expect(list._tail).toEqual(null);
     });
   });
 });
