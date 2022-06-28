@@ -211,6 +211,12 @@ export default class LinkedList<Type> {
     }
     return -1;
   }
+
+  clear(): void{
+    this.head = null;
+    this.tail = null;
+  }
+
 }
 
 const list = new LinkedList<string>();
@@ -243,6 +249,9 @@ list.append('4');
 //
 // console.log(list.findFirst('1'));
 // console.log(list.findLast('1'));
+
+// list.clear();
+// console.log(list.getElementsAsArray());
 
 
 
