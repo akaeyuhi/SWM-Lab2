@@ -139,6 +139,30 @@ export default class LinkedList<Type> {
       temp = temp?.next;
     }
   }
+
+  clone(): LinkedList<Type>{
+    const copy: LinkedList<Type> = new LinkedList<Type>();
+    let temp: NodeT<Type> = this.head;
+
+    for(let i = 0; i < this.length; i++){
+      if(temp !== null) {
+        copy.append(temp.value);
+        temp = temp.next;
+      }
+    }
+
+    return copy;
+  }
+
+  getElementsAsArray(): NodeT<Type>[] {
+    const result: NodeT<Type>[] = [];
+
+    for (let i = 0; i < this.length; i++) {
+      const element: NodeT<Type> | undefined = this.getElement(i);
+      if(element !== undefined) result.push(element);
+    }
+    return result;
+  }
 }
 
 const list = new LinkedList<string>();
@@ -158,4 +182,7 @@ list.deleteAll('5');
 for (let i = 0; i < list.length; i++) {
   console.dir(list.getElement(i), { depth: 10 });
 }
+
+
+
 
