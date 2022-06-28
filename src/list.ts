@@ -138,7 +138,7 @@ export default class LinkedList<Type> {
     for (let i = 0; i < startLength; i++) {
       if (temp !== null) {
         if (temp.value === data) {
-          //this.deleteNode(i - (startLength - this.length));
+          this.deleteNode(i - (startLength - this.length));
         }
         temp = temp.next;
       }
