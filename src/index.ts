@@ -1,11 +1,10 @@
 interface Node<Type> {
-  value: Type,
-  next: NodeT<Type>,
-  prev: NodeT<Type>
+  value: Type;
+  next: NodeT<Type>;
+  prev: NodeT<Type>;
 }
 
-type NodeT<Type> = Node<Type> | null
-
+type NodeT<Type> = Node<Type> | null;
 
 export default class LinkedList<Type> {
   private head: NodeT<Type>;
@@ -24,7 +23,7 @@ export default class LinkedList<Type> {
       count++;
       temp = temp?.next;
     }
-    count += (temp === null ? 0 : 1);
+    count += temp === null ? 0 : 1;
     return count;
   }
 
@@ -65,10 +64,10 @@ export default class LinkedList<Type> {
     }
   }
 
-  insert(data: Type, index: number): void{
+  insert(data: Type, index: number): void {
     this.checkIndex(index, this.length);
 
-    if(index === this.length){
+    if (index === this.length) {
       this.append(data);
       return;
     }
@@ -77,24 +76,24 @@ export default class LinkedList<Type> {
     let currentNode: NodeT<Type> = this.head;
     let prevNode: NodeT<Type> = null;
 
-    for(let i = 0; i < this.length; i++){
-      if(i === index && prevNode !== null && currentNode !== null){
+    for (let i = 0; i < this.length; i++) {
+      if (i === index && prevNode !== null && currentNode !== null) {
         nodeToInsert = {
           value: data,
           next: currentNode,
-          prev: prevNode
+          prev: prevNode,
         };
         prevNode.next = nodeToInsert;
         break;
       }
       prevNode = currentNode;
-      if(currentNode !== null) {
-        currentNode.prev = prevNode
+      if (currentNode !== null) {
+        currentNode.prev = prevNode;
         currentNode = currentNode.next;
       }
     }
 
-    if(index === 0) this.head = nodeToInsert;
+    if (index === 0) this.head = nodeToInsert;
   }
 
   getElement(index: number): NodeT<Type> | undefined {
@@ -110,7 +109,6 @@ export default class LinkedList<Type> {
 }
 
 const list = new LinkedList<string>();
-
 
 list.append('1');
 list.append('3');
