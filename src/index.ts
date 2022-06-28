@@ -115,6 +115,20 @@ export default class LinkedList<Type> {
     }
   }
 
+  deleteAll(data: Type): void {
+    let temp: NodeT<Type> = this.head;
+    const startLength: number = this.length;
+
+    for(let i = 0; i < startLength; i++){
+      if (temp !== null) {
+        if(temp.value === data){
+          this.deleteNode(i - (startLength - this.length));
+        }
+        temp = temp.next;
+      }
+    }
+  }
+
   getElement(index: number): NodeT<Type> | undefined {
     this.checkIndex(index, this.length - 1);
 
@@ -135,9 +149,13 @@ list.append('2');
 list.append('4');
 list.insert('inserted', 2);
 list.deleteNode(2);
-
-console.log(list.length);
-
+list.append('5');
+list.append('5');
 for (let i = 0; i < list.length; i++) {
   console.dir(list.getElement(i), { depth: 10 });
 }
+list.deleteAll('5');
+for (let i = 0; i < list.length; i++) {
+  console.dir(list.getElement(i), { depth: 10 });
+}
+
