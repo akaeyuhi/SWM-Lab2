@@ -187,6 +187,30 @@ export default class LinkedList<Type> {
       this.tail.next = null;
     }
   }
+
+  findFirst(data: Type): number{
+    let temp: NodeT<Type> = this.head;
+
+    for(let i = 0; i < this.length; i++) {
+      if(temp !== null) {
+        if(temp.value === data) return i;
+        temp = temp.next;
+      }
+    }
+    return -1;
+  }
+
+  findLast(data: Type): number{
+    let temp: NodeT<Type> = this.tail;
+
+    for(let i = this.length - 1; i >= 0; i--) {
+      if(temp !== null) {
+        if (temp.value === data) return i;
+        temp = temp.prev;
+      }
+    }
+    return -1;
+  }
 }
 
 const list = new LinkedList<string>();
@@ -212,8 +236,14 @@ list.append('4');
 // console.dir(list.getElementsAsArray(), { depth: 10 });
 // console.dir(copiedList.getElementsAsArray(), { depth: 10 });
 
-list.reverse();
-console.dir(list.getElementsAsArray(), { depth: 10 });
+// list.reverse();
+// console.dir(list.getElementsAsArray(), { depth: 10 });
+// list.append('1');
+// list.append('5');
+//
+// console.log(list.findFirst('1'));
+// console.log(list.findLast('1'));
+
 
 
 
