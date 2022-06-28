@@ -36,6 +36,21 @@ export default class LinkedList<Type> {
     return count;
   }
 
+  append(data: Type) {
+    const nodeToAppend: Node<Type> = {
+      value: data,
+      next: null,
+      prev: this.tail
+    };
+
+    if(this.length){
+      this.tail.next = nodeToAppend;
+      this.tail = nodeToAppend;
+    } else this.head = nodeToAppend;
+
+    if(this.length === 1) this.head.next = this.tail;
+  }
+
   get _head(){
     return this.head ? this.head.value : null;
   }
