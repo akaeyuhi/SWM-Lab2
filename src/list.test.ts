@@ -12,7 +12,7 @@ describe('Linked list tests', () => {
   });
 
   describe('.length getter testing', () => {
-    it('should return starting length of the list (3)', () => {
+    it('should return starting length of the list (4)', () => {
       expect(list.length).toEqual(4);
     });
 
