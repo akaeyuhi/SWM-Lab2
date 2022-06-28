@@ -84,6 +84,7 @@ export default class LinkedList<Type> {
           prev: prevNode,
         };
         prevNode.next = nodeToInsert;
+        currentNode.prev = nodeToInsert;
         break;
       }
       prevNode = currentNode;
@@ -93,21 +94,36 @@ export default class LinkedList<Type> {
       }
     }
 
-    if (index === 0) this.head = nodeToInsert;
+    if (index === 0) {
+      nodeToInsert = {
+        value: data,
+        next: this.head,
+        prev: null
+      }
+      this.head = nodeToInsert;
+    }
   }
 
   deleteNode(index: number): Type | undefined {
     this.checkIndex(index, this.length - 1);
 
     let temp: NodeT<Type> = this.head;
-    let prev: NodeT<Type> = this.tail;
+    let prev: NodeT<Type> = null;
 
     for (let i = 0; i < this.length; i++) {
-      if (i === index && prev !== null && temp !== null) {
-        prev.next = temp.next;
-        temp.prev = prev.prev;
-        if (temp === this.head) this.head = temp.next;
-        if (temp === this.tail) this.tail = prev;
+      if (i === index && temp !== null) {
+
+        if (prev !== null) prev.next = temp.next;
+        if (temp.next !== null ) temp.next.prev = prev;
+
+        if (temp === this.head && temp.next !== null) {
+          this.head = temp.next;
+          this.head.prev = null;
+        }
+        if (temp === this.tail && prev !== null) {
+          this.tail = prev;
+          this.tail.next = null;
+        }
         return temp.value;
       }
       prev = temp;
