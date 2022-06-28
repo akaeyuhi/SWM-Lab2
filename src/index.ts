@@ -217,6 +217,16 @@ export default class LinkedList<Type> {
     this.tail = null;
   }
 
+  extend(list: LinkedList<Type>): void{
+    let temp: NodeT<Type> = list.head;
+    for(let i = 0; i < list.length; i++){
+      if(temp !== null) {
+        this.append(temp.value);
+        temp = temp.next;
+      }
+    }
+  }
+
 }
 
 const list = new LinkedList<string>();
@@ -253,6 +263,9 @@ list.append('4');
 // list.clear();
 // console.log(list.getElementsAsArray());
 
-
-
+const listToExtend = new LinkedList<string>();
+listToExtend.append('extend1');
+listToExtend.append('extend2');
+list.extend(listToExtend);
+console.log(list.getElementsAsArray());
 
