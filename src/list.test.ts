@@ -13,12 +13,12 @@ describe('Linked list tests', () => {
 
   describe('.length getter testing', () => {
     it('should return starting length of the list (3)', () => {
-      expect(list.length).toEqual(3);
+      expect(list.length).toEqual(4);
     });
 
     it('should return starting length + 1 (4)', () => {
       list.append('another node');
-      expect(list.length).toEqual(4);
+      expect(list.length).toEqual(5);
     });
 
     it('should return length of an empty list (0)', () => {
@@ -26,4 +26,11 @@ describe('Linked list tests', () => {
       expect(list.length).toEqual(0);
     });
   });
+
+  describe('.checkIndex() method testing', () => {
+    it('should trow an error', () => {
+      expect(() => list.checkIndex(9, 8)).toThrow(new Error('Incorrect index specified'));
+    })
+  });
+
 });

@@ -27,14 +27,6 @@ export default class LinkedList<Type> {
     return count;
   }
 
-  get _head(): Type | null {
-    return this.head ? this.head.value : null;
-  }
-
-  get _tail(): Type | null {
-    return this.tail ? this.tail.value : null;
-  }
-
   checkIndex(index: number, max: number): void {
     if (index < 0 || index > max) {
       throw new Error('Incorrect index specified');
