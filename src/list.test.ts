@@ -36,7 +36,7 @@ describe('Linked list tests', () => {
   describe('.getElement() method testing', () => {
 
     it('should return element at passed index', () => {
-      expect(list.getElement(0)).toEqual('1');
+      expect(list.getElement(0)!.value).toEqual('1');
     });
 
     it('should throw an error', () => {
@@ -64,7 +64,83 @@ describe('Linked list tests', () => {
       const newValue = '5';
 
       list.append(newValue);
-      expect(list.getElement(list.length - 1)).toEqual(newValue);
+      expect(list.getElement(list.length - 1)!.value).toEqual(newValue);
+    });
+  });
+
+  describe('.insert() method testing', () => {
+    it('should insert element in correct index', () => {
+      const index = 1;
+      const newValue = 'inserted';
+
+      list.insert(newValue, index);
+      expect(list.getElement(index)).toEqual(newValue);
+    });
+
+    it('should change head/tail properties properly', () => {
+      const newValue = 'inserted';
+      const headIndex = 0;
+      const tailIndex = list.length;
+
+      list.insert(newValue, tailIndex);
+      list.insert(newValue, headIndex);
+
+      expect(list._head).toEqual(newValue);
+      expect(list._tail).toEqual(newValue);
+    });
+
+    it('should throw an error', () => {
+      expect(() => list.insert('inserted', list.length + 1))
+        .toThrow(new Error('Incorrect index specified'));
+    });
+  });
+
+  describe('.deleteNode() testing', () => {
+    it('should delete node by passed index', () => {
+      const index = 1;
+      const value: string = list.getElement(index)!.value;
+
+      list.deleteNode(index);
+      expect(list.findFirst(value)).toEqual(-1);
+    });
+
+    it('should change head/tail properties properly', () => {
+      list.deleteNode(0);
+      list.deleteNode(1);
+      expect(list._head).toEqual('3');
+      expect(list._tail).toEqual('4')
+    });
+
+    it('should throw an error', () => {
+      expect(() => list.deleteNode(-1)).toThrow(new Error('Incorrect index specified'));
+    });
+  });
+
+  describe('.deleteAll() testing', () => {
+    it('should delete all nodes with passed value', () => {
+      list.append('2');
+
+      list.deleteAll('2');
+      expect(list.length).toEqual(3);
+      expect(list.getElement(0)!.value).toEqual('1');
+      expect(list.getElement(1)!.value).toEqual('3');
+    });
+
+    it('should not change list, if there are no nodes with passed value', () => {
+      const spy = jest.spyOn(list, 'deleteNode');
+      list.deleteAll('aaaaaaaaaaaaaaaaaaaaaaaaaa');
+      expect(spy).toBeCalledTimes(0);
+    });
+  });
+
+  describe('.clone() testing', () => {
+    it('should copy all elements', () => {
+      const copy: LinkedList<string> = list.clone();
+
+      expect(copy.getElement(0)!.value).toEqual(list.getElement(0)!.value);
+      expect(copy.getElement(1)!.value).toEqual(list.getElement(1)!.value);
+      expect(copy.getElement(2)!.value).toEqual(list.getElement(2)!.value);
+      expect(copy.length).toEqual(list.length);
     });
   });
 });
