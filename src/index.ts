@@ -65,6 +65,36 @@ export default class LinkedList<Type> {
     }
   }
 
+  insert(data: Type, index: number): void{
+    this.checkIndex(index, this.length);
+
+    if(index === this.length){
+      this.append(data);
+      return;
+    }
+
+    let nodeToInsert: NodeT<Type> = null;
+    let currentNode: NodeT<Type> = this.head;
+    let prevNode: NodeT<Type> = null;
+
+    for(let i = 0; i < this.length; i++){
+      if(i === index && prevNode !== null && currentNode !== null){
+        nodeToInsert = {
+          value: data,
+          next: currentNode,
+          prev: prevNode
+        };
+        prevNode.next = nodeToInsert;
+        currentNode.prev = nodeToInsert
+        break;
+      }
+      prevNode = currentNode;
+      currentNode = currentNode!.next;
+    }
+
+    if(index === 0) this.head = nodeToInsert;
+  }
+
   getElement(index: number): NodeT<Type> | undefined {
     this.checkIndex(index, this.length - 1);
 
