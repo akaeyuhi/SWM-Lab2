@@ -96,6 +96,25 @@ export default class LinkedList<Type> {
     if (index === 0) this.head = nodeToInsert;
   }
 
+  deleteNode(index: number): Type | undefined{
+    this.checkIndex(index, this.length - 1);
+
+    let temp: NodeT<Type> = this.head;
+    let prev: NodeT<Type> = this.tail;
+
+    for(let i = 0; i < this.length; i++){
+      if(i === index && prev !== null && temp !== null){
+        prev.next = temp.next;
+        temp.prev = prev.prev;
+        if(temp === this.head) this.head = temp.next;
+        if(temp === this.tail) this.tail = prev;
+        return temp.value;
+      }
+      prev = temp;
+      if(temp !== null) temp = temp.next;
+    }
+  }
+
   getElement(index: number): NodeT<Type> | undefined {
     this.checkIndex(index, this.length - 1);
 
@@ -115,6 +134,7 @@ list.append('3');
 list.append('2');
 list.append('4');
 list.insert('inserted', 2);
+list.deleteNode(2);
 
 console.log(list.length);
 
