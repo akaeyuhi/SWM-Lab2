@@ -22,4 +22,4 @@ Running test suites
 npm run test
 ```
 
-### [Link](https://github.com/akaeyuhi/SWM-Lab2/commit/0aa82fb23843d8937d55c94a8a4c31e130ca5cc2) to commit that failed tests
+### [Link](https://github.com/akaeyuhi/SWM-Lab2/commit/d1a4df399be3b46d538bf2a79c19b7863fb52cad) to commit that failed tests
