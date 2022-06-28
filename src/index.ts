@@ -39,4 +39,3 @@ list.append('4');
 // listToExtend.append('extend2');
 // list.extend(listToExtend);
 // console.log(list.getElementsAsArray());
-

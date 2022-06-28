@@ -96,22 +96,22 @@ export default class LinkedList<Type> {
     if (index === 0) this.head = nodeToInsert;
   }
 
-  deleteNode(index: number): Type | undefined{
+  deleteNode(index: number): Type | undefined {
     this.checkIndex(index, this.length - 1);
 
     let temp: NodeT<Type> = this.head;
     let prev: NodeT<Type> = this.tail;
 
-    for(let i = 0; i < this.length; i++){
-      if(i === index && prev !== null && temp !== null){
+    for (let i = 0; i < this.length; i++) {
+      if (i === index && prev !== null && temp !== null) {
         prev.next = temp.next;
         temp.prev = prev.prev;
-        if(temp === this.head) this.head = temp.next;
-        if(temp === this.tail) this.tail = prev;
+        if (temp === this.head) this.head = temp.next;
+        if (temp === this.tail) this.tail = prev;
         return temp.value;
       }
       prev = temp;
-      if(temp !== null) temp = temp.next;
+      if (temp !== null) temp = temp.next;
     }
   }
 
@@ -119,9 +119,9 @@ export default class LinkedList<Type> {
     let temp: NodeT<Type> = this.head;
     const startLength: number = this.length;
 
-    for(let i = 0; i < startLength; i++){
+    for (let i = 0; i < startLength; i++) {
       if (temp !== null) {
-        if(temp.value === data){
+        if (temp.value === data) {
           this.deleteNode(i - (startLength - this.length));
         }
         temp = temp.next;
@@ -145,17 +145,17 @@ export default class LinkedList<Type> {
 
     for (let i = 0; i < this.length; i++) {
       const element: NodeT<Type> | undefined = this.getElement(i);
-      if(element !== undefined) result.push(element);
+      if (element !== undefined) result.push(element);
     }
     return result;
   }
 
-  clone(): LinkedList<Type>{
+  clone(): LinkedList<Type> {
     const copy: LinkedList<Type> = new LinkedList<Type>();
     let temp: NodeT<Type> = this.head;
 
-    for(let i = 0; i < this.length; i++){
-      if(temp !== null) {
+    for (let i = 0; i < this.length; i++) {
+      if (temp !== null) {
         copy.append(temp.value);
         temp = temp.next;
       }
@@ -164,15 +164,15 @@ export default class LinkedList<Type> {
     return copy;
   }
 
-  reverse(): void{
+  reverse(): void {
     const prevHead: NodeT<Type> = this.head;
     let current: NodeT<Type> = null;
     let prev: NodeT<Type> = null;
     let next: NodeT<Type> = this.head !== null ? this.head.next : null;
-    while(current !== this.tail){
-      if(current === null) {
+    while (current !== this.tail) {
+      if (current === null) {
         current = this.head;
-      } else if (next !== null){
+      } else if (next !== null) {
         current.prev = next;
         prev = current;
         current = next;
@@ -182,29 +182,29 @@ export default class LinkedList<Type> {
     }
     this.head = this.tail;
     this.tail = prevHead;
-    if(this.tail !== null && this.head !== null) {
+    if (this.tail !== null && this.head !== null) {
       this.head.prev = null;
       this.tail.next = null;
     }
   }
 
-  findFirst(data: Type): number{
+  findFirst(data: Type): number {
     let temp: NodeT<Type> = this.head;
 
-    for(let i = 0; i < this.length; i++) {
-      if(temp !== null) {
-        if(temp.value === data) return i;
+    for (let i = 0; i < this.length; i++) {
+      if (temp !== null) {
+        if (temp.value === data) return i;
         temp = temp.next;
       }
     }
     return -1;
   }
 
-  findLast(data: Type): number{
+  findLast(data: Type): number {
     let temp: NodeT<Type> = this.tail;
 
-    for(let i = this.length - 1; i >= 0; i--) {
-      if(temp !== null) {
+    for (let i = this.length - 1; i >= 0; i--) {
+      if (temp !== null) {
         if (temp.value === data) return i;
         temp = temp.prev;
       }
@@ -212,19 +212,18 @@ export default class LinkedList<Type> {
     return -1;
   }
 
-  clear(): void{
+  clear(): void {
     this.head = null;
     this.tail = null;
   }
 
-  extend(list: LinkedList<Type>): void{
+  extend(list: LinkedList<Type>): void {
     let temp: NodeT<Type> = list.head;
-    for(let i = 0; i < list.length; i++){
-      if(temp !== null) {
+    for (let i = 0; i < list.length; i++) {
+      if (temp !== null) {
         this.append(temp.value);
         temp = temp.next;
       }
     }
   }
-
 }
