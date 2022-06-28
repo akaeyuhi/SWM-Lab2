@@ -1,0 +1,19 @@
+{
+  "name": "swm-lab2",
+  "version": "1.0.0",
+  "description": "Software development methodology(IV term) Lab2",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/akaeyuhi/SWM-Lab2.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/akaeyuhi/SWM-Lab2/issues"
+  },
+  "homepage": "https://github.com/akaeyuhi/SWM-Lab2#readme"
+}
