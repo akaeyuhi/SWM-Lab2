@@ -33,4 +33,26 @@ describe('Linked list tests', () => {
     })
   });
 
+  describe('.append() testing', () => {
+    it('should increase number of elements', () => {
+      const prevLength: number = list.length;
+
+      list.append('5');
+      expect(list.length).toBeGreaterThan(prevLength)
+    });
+
+    it('should change "tail" property', () => {
+      const newTail = '5';
+
+      list.append(newTail);
+      expect(list._tail).toEqual(newTail);
+    });
+
+    it('should add element to the end of the list', () => {
+      const newValue = '5';
+
+      list.append(newValue);
+      expect(list.getElement(list.length - 1)).toEqual(newValue);
+    });
+  });
 });
