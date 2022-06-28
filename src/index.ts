@@ -85,11 +85,13 @@ export default class LinkedList<Type> {
           prev: prevNode
         };
         prevNode.next = nodeToInsert;
-        currentNode.prev = nodeToInsert
         break;
       }
       prevNode = currentNode;
-      currentNode = currentNode!.next;
+      if(currentNode !== null) {
+        currentNode.prev = prevNode
+        currentNode = currentNode.next;
+      }
     }
 
     if(index === 0) this.head = nodeToInsert;
@@ -114,6 +116,7 @@ list.append('1');
 list.append('3');
 list.append('2');
 list.append('4');
+list.insert('inserted', 2);
 
 console.log(list.length);
 
